@@ -166,8 +166,9 @@ let tarea = tareas[indice];
 document.getElementById('tareaEditada').value = tarea;
 indiceTareaEditando = indice;
 
-  // Mostrar el modal
-document.getElementById('editarModal').style.display = 'block';
+  // Mostrar el modal usando Bootstrap
+const modal = new bootstrap.Modal(document.getElementById('editarModal'));
+modal.show();
 }
 
 function guardarEdicion() {
@@ -191,14 +192,15 @@ mostrarTareas();
 }
 
 function cerrarModal() {
-document.getElementById('editarModal').style.display = 'none';
+const modal = bootstrap.Modal.getInstance(document.getElementById('editarModal'));
+if (modal) {
+    modal.hide();
+}
 indiceTareaEditando = null;
 }
 
 // Cerrar modal al hacer clic en la X
 document.addEventListener('DOMContentLoaded', function() {
-document.querySelector('.close').addEventListener('click', cerrarModal);
-
   // Cerrar modal al hacer clic fuera del contenido
 window.addEventListener('click', function(event) {
     if (event.target == document.getElementById('editarModal')) {
